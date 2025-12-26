@@ -1,5 +1,6 @@
 import logging
-from services.fivel_client import fivel_client
+from backend.app.services.redis_client import RedisClient
+from services.fivel_client import FivelClient
 from config import get_settings
 
 logging.basicConfig(
@@ -13,9 +14,8 @@ settings = get_settings()
 
 def main() -> None:
     logger.info("Starting the application")
-    fivel_client = fivel_client(settings.API_511_KEY)
-
-    
+    fivel_client = FivelClient(settings.API_511_KEY)
+    redis_client = RedisClient(settings.REDIS_URL)
 
     print(fivel_client.get_stop_predictions("13909"))
 

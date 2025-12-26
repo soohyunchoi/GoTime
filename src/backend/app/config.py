@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     
     # Redis
-    REDIS_URL: str = "redis://localhost:6379"
+    REDIS_URL: str = Field(default="")
     REDIS_MAX_CONNECTIONS: int = 50
     
     # 511 API
@@ -21,7 +21,8 @@ class Settings(BaseSettings):
         description="511 API key for accessing transit data. Required for API access."
     )
     API_511_BASE_URL: str = "http://api.511.org/transit"
-    
+
+
     # Polling
     POLL_INTERVAL_SECONDS: int = 30
     

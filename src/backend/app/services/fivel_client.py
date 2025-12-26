@@ -2,7 +2,7 @@ import httpx
 import asyncio
 from google.transit import gtfs_realtime_pb2
 
-class fivel_client:
+class FivelClient:
     key: str
     client: httpx.AsyncClient
     BASE_URL: str = "http://api.511.org/transit"
@@ -15,9 +15,8 @@ class fivel_client:
         response = await self.client.get(url, headers={"Accept-Encoding": "gzip"})
 
         feed = gtfs_realtime_pb2.FeedMessage()
-        feed.ParseFromString(response.content)
 
-        return response.json()
+        return feed.ParseFromString(response.content)
     
     async def close(self):
         await self.client.aclose()
